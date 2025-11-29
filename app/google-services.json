@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "24337533506",
+    "project_id": "minilocationb6",
+    "storage_bucket": "minilocationb6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24337533506:android:5d67e9e3a09ea9784f3bdb",
+        "android_client_info": {
+          "package_name": "org.freedu.minilocationb6"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCW-xrbrIk61Z9q_7klaZMvGosW-cR7A-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
