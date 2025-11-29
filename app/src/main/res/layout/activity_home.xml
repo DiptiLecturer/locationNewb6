@@ -1,21 +1,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="@color/white"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:background="@color/white"
+    android:padding="20dp"
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnShare"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userRecycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Share My Location" />
-
-    <Button
-        android:id="@+id/btnMap"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="View Last Location on Map" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
