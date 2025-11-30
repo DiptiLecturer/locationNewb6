@@ -6,21 +6,30 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import org.freedu.minilocationb6.databinding.ActivityMyProfileBinding
+import org.freedu.minilocationb6.repo.UserRepository
+import org.freedu.minilocationb6.viewModels.MyProfileViewModel
 
 
 class MyProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyProfileBinding
-    private lateinit var auth: FirebaseAuth
-    private lateinit var db: FirebaseFirestore
-    private lateinit var fusedLocation: FusedLocationProviderClient
+    private val viewModel by viewModels<MyProfileViewModel> {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return MyProfileViewModel(UserRepository()) as T
+            }
+        }
+    }
 
     private var selectedUserId = ""
     private var selectedEmail = ""
@@ -30,47 +39,36 @@ class MyProfileActivity : AppCompatActivity() {
         binding = ActivityMyProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        auth = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
-        fusedLocation = LocationServices.getFusedLocationProviderClient(this)
-
         selectedUserId = intent.getStringExtra("uid")!!
         selectedEmail = intent.getStringExtra("email")!!
 
         binding.email.text = selectedEmail
+        if (UserRepository().getCurrentUserId() != selectedUserId) binding.btnShare.visibility = View.GONE
 
-        val currentUid = auth.currentUser!!.uid
-        if (currentUid != selectedUserId) binding.btnShare.visibility = View.GONE
-
-        db.collection("users").document(selectedUserId).get()
-            .addOnSuccessListener { doc ->
-                val username = doc.getString("username") ?: ""
-                binding.edtUsername.setText(username)
+        FirebaseFirestore.getInstance().collection("users").document(selectedUserId)
+            .get().addOnSuccessListener { doc ->
+                binding.edtUsername.setText(doc.getString("username") ?: "")
             }
 
         binding.btnUpdateUsername.setOnClickListener {
-            val username = binding.edtUsername.text.toString().trim()
-            if (username.isNotEmpty()) {
-                db.collection("users").document(selectedUserId).update("username", username)
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Username updated!", Toast.LENGTH_SHORT).show()
-                        finish()
-                    }
-            } else {
-                Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show()
-            }
+            val username = binding.edtUsername.text.toString()
+            if (username.isNotEmpty()) viewModel.updateUsername(selectedUserId, username)
+        }
+
+        viewModel.usernameUpdateResult.observe(this) { success ->
+            if (success) Toast.makeText(this, "Username updated!", Toast.LENGTH_SHORT).show()
+            else Toast.makeText(this, "Update failed", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnMap.setOnClickListener {
-            val i = Intent(this, MapsActivity::class.java)
-            i.putExtra("uid", selectedUserId)
-            startActivity(i)
+            startActivity(Intent(this, MapsActivity::class.java).apply { putExtra("uid", selectedUserId) })
         }
 
         binding.btnShare.setOnClickListener { shareMyLocation() }
     }
 
     private fun shareMyLocation() {
+        val fusedLocation = LocationServices.getFusedLocationProviderClient(this)
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
         ) {
@@ -80,15 +78,8 @@ class MyProfileActivity : AppCompatActivity() {
         }
 
         fusedLocation.lastLocation.addOnSuccessListener { loc ->
-            if (loc != null) {
-                db.collection("users").document(selectedUserId).update(
-                    mapOf(
-                        "latitude" to loc.latitude,
-                        "longitude" to loc.longitude
-                    )
-                )
-                Toast.makeText(this, "Location Updated!", Toast.LENGTH_SHORT).show()
-            }
+            if (loc != null) viewModel.shareLocation(selectedUserId, loc.latitude, loc.longitude)
+            Toast.makeText(this, "Location Updated!", Toast.LENGTH_SHORT).show()
         }
     }
 }
