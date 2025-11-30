@@ -16,6 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.freedu.minilocationb6.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityHomeBinding
     private lateinit var db: FirebaseFirestore
     private val userList = ArrayList<User>()
@@ -26,21 +27,23 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         db = FirebaseFirestore.getInstance()
-
         binding.userRecycler.layoutManager = LinearLayoutManager(this)
 
         loadUsers()
+
+        binding.btnLogout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val i = Intent(this, AuthActivity::class.java)
+            i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(i)
+        }
     }
 
     private fun loadUsers() {
-        db.collection("users").addSnapshotListener { value, error ->
-            if (error != null) return@addSnapshotListener
-
+        db.collection("users").addSnapshotListener { value, _ ->
             userList.clear()
-
             for (doc in value!!) {
-                val user = doc.toObject(User::class.java)
-                userList.add(user)
+                userList.add(doc.toObject(User::class.java))
             }
 
             binding.userRecycler.adapter =
@@ -53,3 +56,4 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 }
+

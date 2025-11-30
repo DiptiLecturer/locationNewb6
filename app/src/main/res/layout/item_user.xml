@@ -5,26 +5,28 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/email"
-        android:text="Email"
+        android:id="@+id/tvUsername"
+        android:text="Username"
         android:textStyle="bold"
-        android:textColor="@color/black"
         android:textSize="18sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
     <TextView
-        android:id="@+id/lat"
-        android:textColor="@color/black"
+        android:id="@+id/tvEmail"
+        android:text="Email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvLat"
         android:text="Lat: "
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
     <TextView
-        android:textColor="@color/black"
-        android:id="@+id/lng"
+        android:id="@+id/tvLng"
         android:text="Long: "
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"/>
 </LinearLayout>
