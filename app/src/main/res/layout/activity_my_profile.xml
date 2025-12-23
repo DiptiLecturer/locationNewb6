@@ -1,57 +1,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/greenLight"
     android:gravity="center"
-    android:background="@color/white"
     android:orientation="vertical"
     android:padding="20dp">
 
     <TextView
-        android:textColor="#00B0FF"
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8.dp"
         android:text="Your Email"
+        android:textColor="@color/greenPrimaryDark"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
 
     <EditText
         android:id="@+id/edtUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:hint="Enter Username"
-        android:paddingHorizontal="8.dp"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/textDark"
+        android:backgroundTint="@color/greenPrimary"
+        android:layout_marginBottom="16dp"/>
 
     <Button
-        android:textColor="@color/white"
         android:id="@+id/btnUpdateUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="#2979FF"
         android:text="Update Username"
-        android:textSize="18sp" />
+        android:textColor="@color/white"
+        android:backgroundTint="@color/greenPrimary"
+        android:layout_marginBottom="12dp"/>
 
     <Button
         android:id="@+id/btnShare"
-        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/black"
         android:text="Share My Location"
-        android:textSize="18sp" />
+        android:textColor="@color/white"
+        android:backgroundTint="@color/greenAccent"
+        android:layout_marginBottom="12dp"/>
 
     <Button
-        android:textColor="@color/white"
         android:id="@+id/btnMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="#2979FF"
         android:text="View Location on Map"
-        android:textSize="18sp" />
+        android:textColor="@color/white"
+        android:backgroundTint="@color/greenPrimaryDark"/>
 </LinearLayout>

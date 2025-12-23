@@ -1,5 +1,6 @@
 package org.freedu.minilocationb6.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,7 @@ class UserAdapter(
         return UserViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = userList[position]
         holder.binding.tvUsername.text = user.username.ifEmpty { "No Name" }

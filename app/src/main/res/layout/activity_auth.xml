@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/greenLight"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="20dp">
@@ -10,49 +10,50 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login/SignUp"
+        android:text="Login / Sign Up"
         android:textAlignment="center"
-        android:textColor="#00B0FF"
-        android:textSize="34.sp"
-        android:textStyle="bold" />
+        android:textColor="@color/greenPrimaryDark"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"/>
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:hint="Email"
-        android:textColor="@color/black"
-        android:textSize="24.sp" />
+        android:textColor="@color/textDark"
+        android:textSize="18sp"
+        android:backgroundTint="@color/greenPrimary"
+        android:layout_marginBottom="12dp"/>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textColor="@color/black"
-        android:textSize="24.sp" />
+        android:textColor="@color/textDark"
+        android:textSize="18sp"
+        android:backgroundTint="@color/greenPrimary"
+        android:layout_marginBottom="20dp"/>
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="#00B0FF"
         android:text="Login"
         android:textColor="@color/white"
-        android:textSize="24.sp" />
+        android:textSize="18sp"
+        android:backgroundTint="@color/greenPrimary"
+        android:layout_marginBottom="12dp"/>
 
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:text="Register"
-        android:backgroundTint="#00E676"
         android:textColor="@color/white"
-        android:textSize="24.sp" />
-
+        android:textSize="18sp"
+        android:backgroundTint="@color/greenAccent"/>
 </LinearLayout>
