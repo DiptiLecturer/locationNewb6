@@ -14,6 +14,7 @@ import org.freedu.minilocationb6.viewModels.AuthViewModel
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthBinding
+
     private val viewModel by viewModels<AuthViewModel> {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {

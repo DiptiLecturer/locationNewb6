@@ -86,10 +86,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 // Center map to Bangladesh with zoom out view
                 map.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
-                        LatLng(23.777176, 90.399452),
-                        6f
+                        LatLng(22.8246, 91.1017),
+                        10f
                     )
                 )
+
             }
         }
 

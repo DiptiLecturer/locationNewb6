@@ -51,6 +51,8 @@ class MyProfileActivity : AppCompatActivity() {
         binding.btnUpdateUsername.setOnClickListener {
             val username = binding.edtUsername.text.toString()
             if (username.isNotEmpty()) viewModel.updateUsername(selectedUserId, username)
+            startActivity(Intent(this, FriendListActivity::class.java).apply { putExtra("uid", selectedUserId) })
+            finish()
         }
 
         viewModel.usernameUpdateResult.observe(this) { success ->
